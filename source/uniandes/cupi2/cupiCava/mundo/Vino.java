@@ -139,7 +139,7 @@ public class Vino
         presentacion = pPresentacion;
         anhoElaboracion = pAnhoElaboracion;
         contenidoAzucar = pContenidoAzucar;
-        tipo = pTipo;
+        tipo = calcularTipoVino(pContenidoAzucar);
         color = pColor;
         lugarOrigen = pLugarOrigen;
         imagen = pImagen;
@@ -313,6 +313,33 @@ public class Vino
     public String toString( )
     {
         return nombre;
+    }
+    
+    //Metodos auxiliares para la invariante
+    //-----------------------------------------------------------------
+    
+
+    /**
+     * Método auxiliar para calcular el tipo de vino basado en su contenido de azúcar.
+     * Este método es crucial para el constructor y la verificación de la invariante.
+     * @param azucar Contenido de azúcar del vino en g/l.
+     * @return El tipo de vino (SECO, ABOCADO, SEMI_SECO, SEMI_DULCE, DULCE) según los rangos.
+     */
+    private String calcularTipoVino(double azucar) {
+    	if (azucar >= 0 && azucar < 5) {
+    		return SECO;
+    	}else if (azucar >= 5 && azucar < 15) {
+    		return ABOCADO;
+    	}else if (azucar >= 15 && azucar < 30) {
+    		return SEMI_SECO;
+    	}else if (azucar >= 30 && azucar < 50) {
+    		return SEMI_DULCE;
+    	}else if (azucar >= 50) {
+    		return DULCE;
+    	}else {
+    		return "TIPO_DESCONOCIDO";//se asegura que siempre retorne un tipo valido
+    	}
+    	
     }
 
     // -----------------------------------------------------------------
