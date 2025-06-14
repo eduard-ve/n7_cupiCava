@@ -10,6 +10,8 @@
  */
 package uniandes.cupi2.cupiCava.mundo;
 
+import java.time.Year;
+
 /**
  * Clase que representa un vino almacenado en la Cupi-Cava.<br>
  * <b>inv: </b> <br>
@@ -143,6 +145,9 @@ public class Vino
         color = pColor;
         lugarOrigen = pLugarOrigen;
         imagen = pImagen;
+        
+        //Después de inicializar todos los atributos, se verifica la invariante.
+        verificarInvariente();
 
     }
 
@@ -347,4 +352,34 @@ public class Vino
     // -----------------------------------------------------------------
 
     // TODO Parte1 PuntoB: Documente e implemente el método verificarInvariante. Si lo desea puede crear métodos privados en esta parte.
+    /**
+     * Verifica la invariante de la clase.
+     * Lanza una AssertionError si alguna de las condiciones de la invariante no se cumple.
+     */
+    public void verificarInvariente() {
+    	//El nombre del vino no puede ser nulo ni vacio.
+    	assert nombre != null && !nombre.trim().isEmpty() : "Invariante incorrecta: el nombre del vino no puede ser nulo o vacio.";
+    	
+    	//La presentación debe ser BARRIL o BOTELLA.
+    	assert presentacion.equals(BARRIL) || presentacion.equals(BOTELLA) : "Invariante incorrecta: la presentacion debe ser barril o botella.";
+    	
+    	//El año de elaboración debe ser un valor positivo y no puede ser un año futuro.
+        // Usamos Year.now().getValue() para obtener el año actual.
+    	assert contenidoAzucar >= 0 && anhoElaboracion <= Year.now().getValue() + 1 : "Invariante incorrecta: el año de elaboracion no es valido.";
+    	
+    	//El contenido de azúcar debe ser mayor o igual a cero.
+    	assert contenidoAzucar >= 0 : "Invariante incorrecta: el contenido de azucar no puede ser negativo 0 cero.";
+    	
+    	//El color debe ser TINTO, ROSADO o BLANCO.
+    	assert color.equals(TINTO) || color.equals(ROSADO) || color.equals(BLANCO) : "Invariante incorrecta: el color debe ser TINTO, ROSADO o BLANCO.";
+    	
+    	//El lugar de origen no puede ser nulo ni vacío.
+    	assert lugarOrigen != null && !lugarOrigen.trim().isEmpty() : "Invariante incorrecta: el lugar de origen no puede ser nulo o vacío.";
+    	
+    	//La imagen (su ruta) no puede ser nula ni vacía.
+    	assert imagen != null && !imagen.trim().isEmpty() : "Invariante incorrecta: la imagen no puede ser nula o vacía.";
+    	
+    	//El tipo de vino debe corresponder exactamente al contenido de azúcar.
+    	 assert tipo.equals(calcularTipoVino(contenidoAzucar)) : "Invariante incorrecta: el tipo de vino no corresponde al contenido de azúcar.";
+    }
 }
