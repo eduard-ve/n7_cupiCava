@@ -163,7 +163,7 @@ public class CupiCava
      */
     public ArrayList<Vino> buscarVinosDeTipo( String pTipo )
     {
-    	ArrayList<Vino> vinosEncontrados = new ArrayList<>();
+     	ArrayList<Vino> vinosEncontrados = new ArrayList<>();
         for (Vino vino : vinos) {
             if (vino.darTipo().equalsIgnoreCase(pTipo)) {
                 vinosEncontrados.add(vino);
@@ -210,8 +210,24 @@ public class CupiCava
      */
     public void ordenarVinosPorNombre( )
     {
-   	 // TODO Parte2 PuntoL: Implemente el método según la documentación dada.
-   }
+   	 
+    	int n = vinos.size();
+        boolean swapped;
+        for (int i = 0; i < n - 1; i++) {
+            swapped = false;
+            for (int j = 0; j < n - i - 1; j++) {
+                if (vinos.get(j).compararPorNombre(vinos.get(j + 1)) > 0) {
+                    Vino temp = vinos.get(j);
+                    vinos.set(j, vinos.get(j + 1));
+                    vinos.set(j + 1, temp);
+                    swapped = true;
+                }
+            }
+            if (!swapped) break;
+        }
+        verificarInvariante(); 
+    }
+   
 
     /**
      * Ordena descendentemente la lista de vinos por año de elaboración usando el algoritmo de selección. <br>
