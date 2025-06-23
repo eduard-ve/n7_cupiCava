@@ -114,8 +114,21 @@ public class CupiCava
      */
     public Vino buscarVinoMasDulce( )
     {
-   	 // TODO Parte2 PuntoI: Implemente el método según la documentación dada.
-    }
+    	  if (vinos.isEmpty()) {
+              return null;
+          }
+
+          Vino vinoMasDulce = vinos.get(0);
+          for (int i = 1; i < vinos.size(); i++) {
+              Vino actual = vinos.get(i);
+              if (actual.darContenidoAzucar() > vinoMasDulce.darContenidoAzucar()) {
+                  vinoMasDulce = actual;
+              }
+          }
+          return vinoMasDulce;
+      }
+
+    
 
     /**
      * Busca el vino más seco (con menor contenido en azúcar) de la cava. <br>
