@@ -236,8 +236,21 @@ public class CupiCava
      */
     public void ordenarVinosPorAnhoElaboracion( )
     {
-   	 // TODO Parte2 PuntoM: Implemente el método según la documentación dada.
-   }
+    	int n = vinos.size();
+        for (int i = 0; i < n - 1; i++) {
+            int maxIndex = i; // 
+            for (int j = i + 1; j < n; j++) {
+                if (vinos.get(j).compararPorAnhoElaboracion(vinos.get(maxIndex)) > 0) {
+                    maxIndex = j;
+                }
+            }
+            Vino temp = vinos.get(maxIndex);
+            vinos.set(maxIndex, vinos.get(i));
+            vinos.set(i, temp);
+        }
+        verificarInvariante(); 
+    }
+   
 
     /**
      * Ordena ascendentemente la lista de vinos por lugar de origen usando el algoritmo de inserción. <br>
