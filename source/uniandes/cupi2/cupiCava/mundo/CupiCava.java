@@ -163,8 +163,15 @@ public class CupiCava
      */
     public ArrayList<Vino> buscarVinosDeTipo( String pTipo )
     {
-   	 // TODO Parte2 PuntoK: Implemente el método según la documentación dada.
-   }
+    	ArrayList<Vino> vinosEncontrados = new ArrayList<>();
+        for (Vino vino : vinos) {
+            if (vino.darTipo().equalsIgnoreCase(pTipo)) {
+                vinosEncontrados.add(vino);
+            }
+        }
+        return vinosEncontrados;
+    }
+   
 
     /**
      * Agrega un nuevo vino a la cava si no existe actualmente un vino en la cava con el mismo nombre.<br>
