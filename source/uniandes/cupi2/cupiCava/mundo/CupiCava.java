@@ -15,7 +15,6 @@ import java.util.ArrayList;
 /**
  * Clase que representa la Cupi-Cava. <br>
  * <b>inv: </b> <br>
- * TODO Parte1 PuntoC: Declare la invariante de la clase.
  */
 public class CupiCava
 {
@@ -39,6 +38,7 @@ public class CupiCava
     public CupiCava( )
     {
         vinos = new ArrayList<Vino>( );
+        verificarInvariante();
     }
 
     // -------------------------------------------------------------
@@ -187,7 +187,41 @@ public class CupiCava
     // Invariante
     // -----------------------------------------------------------------
 
-    // TODO Parte1 PuntoD: Documente e implemente el método verificarInvariante. Si lo desea puede crear métodos privados en esta parte.
+    /**
+     * Verifica la invariante de la clase CupiCava.
+     * Lanza una AssertionError si alguna de las condiciones de la invariante no se cumple.
+     */
+    public void verificarInvariante() {
+        // 1. La colección de vinos (ArrayList 'vinos') no debe ser nula.
+        assert vinos != null : "Invariante invalida: La lista de vinos no puede ser nula.";
+
+        // 2. No debe haber vinos con nombres repetidos en la colección.
+        assert !hayVinosConNombresRepetidos() : "Invariante invalida: Existen vinos con nombres repetidos en la cava.";
+
+        // 3. Todos los objetos Vino en la lista deben cumplir con su propia invariante.
+        for (Vino vino : vinos) {
+            vino.verificarInvariante();
+        }
+    }
+    
+    
+    /**
+     * Método auxiliar para verificar si hay vinos con nombres repetidos en la cava.
+     * Es utilizado por el método verificarInvariante().
+     * @return true si se encuentran nombres repetidos, false de lo contrario.
+     */
+    private boolean hayVinosConNombresRepetidos() {
+        // Utiliza un enfoque de doble bucle para comparar cada vino con los demás
+        for (int i = 0; i < vinos.size(); i++) {
+            for (int j = i + 1; j < vinos.size(); j++) {
+                // Compara los nombres ignorando mayúsculas/minúsculas
+                if (vinos.get(i).darNombre().equalsIgnoreCase(vinos.get(j).darNombre())) {
+                    return true; // 
+                }
+            }
+        }
+        return false;
+    }
 
     // -----------------------------------------------------------------
     // Puntos de Extensión
