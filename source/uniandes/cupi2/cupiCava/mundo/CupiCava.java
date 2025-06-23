@@ -126,7 +126,7 @@ public class CupiCava
               }
           }
           return vinoMasDulce;
-      }
+     }
 
     
 
@@ -138,8 +138,21 @@ public class CupiCava
      */
     public Vino buscarVinoMasSeco( )
     {
-   	 // TODO Parte2 PuntoJ: Implemente el método según la documentación dada.
-   }
+    	
+    	 if (vinos.isEmpty()) {
+             return null;
+         }
+
+         Vino vinoMasSeco = vinos.get(0);
+         for (int i = 1; i < vinos.size(); i++) {
+             Vino actual = vinos.get(i);
+             if (actual.darContenidoAzucar() < vinoMasSeco.darContenidoAzucar()) {
+                 vinoMasSeco = actual;
+             }
+         }
+         return vinoMasSeco;
+    }
+   
 
     /**
      * Busca los vinos del tipo dado por parámetro. <br>
