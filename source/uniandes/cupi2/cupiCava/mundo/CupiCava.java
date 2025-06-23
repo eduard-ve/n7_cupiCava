@@ -86,8 +86,25 @@ public class CupiCava
      */
     public Vino buscarBinarioPorNombre( String pNombre )
     {
-   	 // TODO Parte2 PuntoH: Implemente el método según la documentación dada.
-    }
+    	  int bajo = 0;
+          int alto = vinos.size() - 1;
+
+          while (bajo <= alto) {
+              int medio = (bajo + alto) / 2;
+              Vino vinoMedio = vinos.get(medio);
+              int comparacion = pNombre.compareToIgnoreCase(vinoMedio.darNombre());
+
+              if (comparacion == 0) {
+                  return vinoMedio; 
+              } else if (comparacion < 0) {
+                  alto = medio - 1;
+              } else {
+                  bajo = medio + 1;
+              }
+          }
+          return null;
+      }
+    
 
     /**
      * Busca el vino más dulce (con mayor contenido en azúcar) de la cava. <br>
